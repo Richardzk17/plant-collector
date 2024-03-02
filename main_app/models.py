@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 WATERING = (
   ('M', 'Morning'),
@@ -12,6 +13,7 @@ class Plant(models.Model):
     description = models.TextField()
     height = models.IntegerField()
     watering_frequency = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
       return self.species
