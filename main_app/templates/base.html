@@ -28,11 +28,10 @@
     </div>
     <nav>
       <ul>
-        <!-- new markup below -->
-        <li><a href="/plants">Garden</a></li>
-        <!-- existing markup -->
-        <li><a href="/about">About</a></li>      </ul>
-    </nav>
+        <li><a href="{% url 'plant-index' %}">Garden</a></li>
+        <li><a href="{% url 'plant-create' %}">Add a plant</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+      </ul>
   </header>
   <main>
     {% block content %}
