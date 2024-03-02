@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plant
+from .forms import FeedingForm
+
 
 
 def home(request):
@@ -16,7 +18,19 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
-  return render(request, 'plants/detail.html', { 'plant': plant })
+  feeding_form = FeedingForm()
+  return render(request, 'plants/detail.html', {
+    # include the cat and feeding_form in the context
+    'plant': plant, 'feeding_form': feeding_form
+  })
+
+def add_feeding(request, plant_id):
+  form = FeedingForm(request.POST)
+  if form.is_valid():
+    new_feeding = form.save(commit=False)
+    new_feeding.plant_id = plant_id
+    new_feeding.save()
+  return redirect('plant-detail', plant_id=plant_id)
 
 class PlantCreate(CreateView):
   model = Plant
