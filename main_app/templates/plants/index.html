@@ -5,7 +5,7 @@
 <link 
   rel="stylesheet"
   type="text/css"
-  href="{% static 'css/cats/cat-index.css' %}"
+  href="{% static 'css/plants/plant-index.css' %}"
 />
 {% endblock %}
 
@@ -22,21 +22,24 @@
 <section class="card-container">
   {% for plant in plants %}
     <div class="card">
-      <div class="card-content">
-        <div class="card-img-container">
-          <img 
-            src="{% static 'images/sk8r-boi-cat.svg' %}" 
-            alt="A skater boy cat"
-          >
+      <a href="/plants/{{ plant.id }}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img 
+              src="{% static 'images/sk8r-boi-cat.svg' %}" 
+              alt="A skater boy cat"
+            >
+          </div>
+          <h2 class="card-title">{{ plant.species }}</h2>
+          {% if plant.height > 0 %}
+            <p>A {{ plant.height }} inch</p>
+          {% else %}
+            <p>{{ plant.species }} </p>
+          {% endif %}
+          <p><small>{{ plant.description }}</small></p>
         </div>
-        <h2 class="card-title">{{ plant.name }}</h2>
-        {% if plant.height > 0 %}
-          <p>A {{ plant.height }} year old {{ plant.breed }}</p>
-        {% else %}
-          <p>A {{ plant.breed }} kitten.</p>
-        {% endif %}
-        <p><small>{{ plant.description }}</small></p>
-      </div>
+      {% comment %} And this line {% endcomment %}
+      </a>
     </div>
   {% endfor %}
 </section>
