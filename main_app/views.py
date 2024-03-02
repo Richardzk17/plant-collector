@@ -3,6 +3,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Plant
 from .forms import FeedingForm
 
@@ -13,11 +15,10 @@ class Home(LoginView):
 
 def about(request):
   return render(request, 'about.html')
-
+@login_required
 def plant_index(request):
-    plants = Plant.objects.all()
+    plants = Plant.objects.filter(user=request.user)
     return render(request, 'plants/index.html', { 'plants': plants })
-
 
 def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
@@ -35,7 +36,7 @@ def add_feeding(request, plant_id):
     new_feeding.save()
   return redirect('plant-detail', plant_id=plant_id)
 
-class PlantCreate(CreateView):
+class PlantCreate(LoginRequiredMixin, CreateView):
   model = Plant
   fields = ['species', 'description', 'watering_frequency', 'height']
 
@@ -43,11 +44,11 @@ class PlantCreate(CreateView):
     form.instance.user = self.request.user 
     return super().form_valid(form)
 
-class PlantUpdate(UpdateView):
+class PlantUpdate(LoginRequiredMixin, UpdateView):
   model = Plant
   fields = ['species', 'description', 'watering_frequency', 'height']
 
-class PlantDelete(DeleteView):
+class PlantDelete(LoginRequiredMixin, DeleteView):
   model = Plant
   success_url = '/plants/'
 
