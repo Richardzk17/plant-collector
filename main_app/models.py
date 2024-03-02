@@ -20,7 +20,7 @@ class Plant(models.Model):
       return reverse('plant-detail', kwargs={'plant_id': self.id})
 
 class Feeding(models.Model):
-  date = models.DateField()
+  date = models.DateField('Watering time')
   watering = models.CharField(
     max_length=1,
     choices=WATERING,
@@ -30,5 +30,4 @@ class Feeding(models.Model):
   plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
 
   def __str__(self):
-    # Nice method for obtaining the friendly value of a Field.choice
     return f"{self.get_watering_display()} on {self.date}"
