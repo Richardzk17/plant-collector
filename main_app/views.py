@@ -20,12 +20,12 @@ def plant_detail(request, plant_id):
 
 class PlantCreate(CreateView):
   model = Plant
-  fields = ['species', 'description', 'watering_frequency', 'height' ]
+  fields = ['species', 'description', 'watering_frequency', 'height']
   success_url = '/plants/'
 
 class PlantUpdate(UpdateView):
   model = Plant
-  fields = ['species', 'description', 'watering_frequency', 'height' ]
+  fields = ['species', 'description', 'watering_frequency', 'height']
 
 class PlantDelete(DeleteView):
   model = Plant
