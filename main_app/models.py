@@ -33,3 +33,10 @@ class Feeding(models.Model):
 
   def __str__(self):
     return f"{self.get_watering_display()} on {self.date}"
+
+class Photo(models.Model):
+  url = models.CharField(max_length=250)
+  plant = models.OneToOneField(Plant, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"Photo for cat_id: {self.plant_id} @{self.url}"

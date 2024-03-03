@@ -5,8 +5,12 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Plant
+from .models import Plant, Photo
+import uuid
+import boto3
 from .forms import FeedingForm
+S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
+BUCKET = 'rich-plant-collector'
 
 
 
@@ -24,7 +28,6 @@ def plant_detail(request, plant_id):
   plant = Plant.objects.get(id=plant_id)
   feeding_form = FeedingForm()
   return render(request, 'plants/detail.html', {
-    # include the cat and feeding_form in the context
     'plant': plant, 'feeding_form': feeding_form
   })
 
@@ -59,9 +62,26 @@ def signup(request):
     if form.is_valid():
       user = form.save()
       login(request, user)
-      return redirect('cat-index')
+      return redirect('plant-index')
     else:
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'signup.html', context)
+
+def add_photo(request, plant_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, plant_id=plant_id)
+      plant_photo = Photo.objects.filter(plant_id=plant_id)
+      if plant_photo.first():
+        plant_photo.first().delete()
+      photo.save()
+    except Exception as err:
+      print('An error occurred uploading file to S3: %s' % err)
+  return redirect('plant-detail', plant_id=plant_id)
