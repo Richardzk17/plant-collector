@@ -1,3 +1,6 @@
+
+
+
 .cat-container {
   padding: 35px 30px;
   display: flex;
@@ -24,12 +27,7 @@
   margin-top: 20px;
 }
 
-.feedings-toy-container {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 20px;
-  align-items: center;
-}
+
 
 .subsection-title {
   display: flex;
@@ -41,11 +39,6 @@
   margin: 0 8px;
 }
 
-.toy-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
 
 .color-block {
   opacity: 0.8;
@@ -155,26 +148,13 @@
 .feedings th {
   font-size: var(--font-l);
   padding: 5px 5px 0;
-  border-bottom: rgb(36, 116, 248) solid 2px;
+  border-bottom: rgb(36, 248, 146) solid 2px;
 }
 
 .feedings tr:nth-child(even) {
   background-color: #f3f3fd;
 }
 
-.toy-container p {
-  margin: 12px 0;
-}
-
-.toy-container a {
-  text-decoration: none;
-  color: #111;
-}
-
-.toy-container .btn {
-  padding: 3px 10px;
-  margin-left: 10px;
-}
 
 #file-input {
   overflow: hidden;
@@ -216,4 +196,4 @@
   .feedings-toy-container {
     padding: 0 40px;
   }
-}
+} 
