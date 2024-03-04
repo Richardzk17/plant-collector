@@ -12,11 +12,9 @@
 {% block content %}
 
 <section class="page-header">
-  <h1>Cat List</h1>
-  <img src="{% static 'images/cool-cat.svg' %}" alt="A cool cat" />
-  <img src="{% static 'images/happy-cat.svg' %}" alt="A happy cat" />
-  <img src="{% static 'images/teacup-cat.svg' %}" alt="A cat in a teacup" />
-  <img src="{% static 'images/cat-in-box.svg' %}" alt="A cat in a box" />
+  <h1>Garden</h1>
+  <img src="{% static 'images/potted-plant (1).svg' %}" alt="A cool cat" />
+
 </section>
 
 <section class="card-container">
@@ -40,11 +38,11 @@
           </div>
           <h2 class="card-title">{{ plant.species }}</h2>
           {% if plant.height > 0 %}
-            <p>A {{ plant.height }} inch</p>
+            <p>A {{ plant.height }} inch {{ plant.species }}</p>
           {% else %}
             <p>{{ plant.species }} </p>
           {% endif %}
-          <p><small>{{ plant.description }}</small></p>
+          <p class='plantdescription'><small>{{ plant.description }}</small></p>
         </div>
       {% comment %} And this line {% endcomment %}
       </a>
