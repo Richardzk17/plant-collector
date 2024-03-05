@@ -42,11 +42,13 @@
   <div class="plant-details">
     <h1>{{ plant.species }}</h1>
     {% if plant.height > 0 %}
-      <p>A {{ plant.height }} inch</p>
     {% else %}
       <p>{{ plant.species }} </p>
     {% endif %}
     <p>{{ plant.description }}</p>
+    <p><strong>Needs to be watered: </strong>{{ plant.watering_frequency }}</p>
+    <p><strong>Height: </strong> {{ plant.height }} inch</p>
+
     <div class="plant-actions">
       <a href="{% url 'plant-update' plant.id %}" class="btn warn">Edit</a>
       <a href="{% url 'plant-delete' plant.id %}" class="btn danger">Delete</a>
@@ -66,26 +68,13 @@
       </label>
       <button type="submit" class="btn submit">Upload Photo</button>
     </form>
-  {% comment %} New markup above {% endcomment %}
   </div>
 <div class="feedings-toy-container">
   <section class="feedings">
     <div class="subsection-title">
-      <h2>Feedings</h2>
-      {% comment %} <img 
-        src="{% static 'images/cat-cone.svg' %}" 
-        alt="An ice cream cone cat"
-      />
-      <img 
-        src="{% static 'images/cat-onigiri.svg' %}"
-        alt="A cat as onigiri"
-      />
-      <img 
-        src="{% static 'images/kitty-kabob.svg' %}" 
-        alt="A kabob of kittens"
-      /> {% endcomment %}
+      <h2>waterings</h2>
     </div>
-    <h3>Add a Feeding</h3>
+    <h3>Watering schedule </h3>
     <form
       action="{% url 'add-feeding' plant.id %}" 
       method="post" 
@@ -94,9 +83,9 @@
     >
       {% csrf_token %}
       {{ feeding_form.as_p }}
-      <button type="submit" class="btn submit">Add Feeding</button>
+      <button type="submit" class="btn submit">Add Watering</button>
     </form>
-    <h3>Past Feedings</h3>
+    <h3>Past Watering</h3>
     {% if plant.feeding_set.all.count %}
       <table>
         <thead>
@@ -113,7 +102,7 @@
       </table>
     {% else %}
       <div class="subsection-content">
-        <p>{{plant.species}} has never been water 😔</p>
+        <p>{{plant.species}} has never been watered 😔</p>
       </div>
     {% endif %}
   </section>

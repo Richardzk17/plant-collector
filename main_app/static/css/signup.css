@@ -3,8 +3,8 @@ body{
   height: 100vh;
   background: linear-gradient(
     to right,
-    rgb(94, 228, 16) 0%,
-    rgb(94, 228, 16) 60%,
+    rgb(80, 254, 77) 40%,
+    rgb(196, 253, 155) 60%,
     white 20%,
     white 100%
   );

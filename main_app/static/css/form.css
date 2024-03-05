@@ -1,7 +1,19 @@
+body{
+  background-color: rgb(246, 253, 241);
+}
+
+
+
 .form-container {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 15px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgb(195, 195, 195);
+  background-color: rgb(255, 255, 255);
+  border-radius: var(--card-border-radius);
+  margin-left: 30px;
 }
 
 table {

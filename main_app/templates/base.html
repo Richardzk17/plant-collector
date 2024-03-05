@@ -18,23 +18,14 @@
 </head>
 <body>
   <header>
-    {% comment %} <div class="header-logo-container">
-      <a href="/">
-        <img 
-          src="{% static 'images/header-logo.svg' %}"
-          alt="The Cat Collector Logo"
-        >
-      </a>
-    </div> {% endcomment %}
+
     <nav>
       <ul>
         {% if user.is_authenticated %}
           <li><a href="{% url 'plant-index' %}">Garden</a></li>
           <li><a href="{% url 'plant-create' %}">Add a plant</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'logout' %}">Log out</a></li>
         {% else %}
-          <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'home' %}">Login</a></li>
           <li><a href="{% url 'signup' %}">Sign Up</a></li>
         {% endif %} 
