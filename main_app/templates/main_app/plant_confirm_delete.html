@@ -2,18 +2,16 @@
 {% load static %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/confirm.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/comfirm.css' %}"/>
 {% endblock %}
+
+{% block content %}
 
 <div class="page-header">
 
   <h1>Delete plant?</h1>
 </div>
-<link
-rel="shortcut icon"
-type="image/png"
-href="{% static 'images/sunflowercatoon.svg' %}"
->
+
 <h2>Are you sure you want to set {{plant.species}} free?</h2>
 
 <form action="" method="post" class="form">

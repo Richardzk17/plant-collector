@@ -121,7 +121,12 @@ img{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
+}
+
+.feedings{
+  margin-bottom: 60px;
+
 }
 
 .subsection-title img {
