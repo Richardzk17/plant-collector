@@ -2,3 +2,7 @@ body{
   background-color: rgb(246, 253, 241);
 }
 
+img{
+  height: 300px;
+  width: 200px;
+}
